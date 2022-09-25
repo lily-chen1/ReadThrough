@@ -1,5 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -39,11 +43,13 @@ writeUserData("afsjfj", "fsafan", "fsafasn", "fasfn")
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        nice
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
