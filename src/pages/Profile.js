@@ -1,58 +1,12 @@
+import React, { useState, useEffect } from "react";
 import "./resources/Profile.css";
 import profilePic from "./resources/profilePic.jpg";
-
-import {
-  getDatabase,
-  ref,
-  set,
-  onValue,
-  child,
-  push,
-  update,
-} from "firebase/database";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-import { observable, action, makeObservable } from "mobx";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBsvX3cEiyWsutpBgDM4TpF7bMyX10dvzU",
-  authDomain: "capstone-test-dd957.firebaseapp.com",
-  databaseURL: "https://capstone-test-dd957-default-rtdb.firebaseio.com",
-  projectId: "capstone-test-dd957",
-  storageBucket: "capstone-test-dd957.appspot.com",
-  messagingSenderId: "386690672581",
-  appId: "1:386690672581:web:ae51af75dfad432ac0cdac",
-  measurementId: "G-NS8XGRKMEE",
-};
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-// Initialize Realtime Database and get a reference to the service
-const database = getDatabase(app);
-
-function writeUserData(userId, name, email, imageUrl) {
-  const db = getDatabase();
-  set(ref(db, "users/" + userId), {
-    username: name,
-    email: email,
-    profile_picture: imageUrl,
-  });
-}
-
-const db = getDatabase();
-// const starCountRef = ref(db, 'posts/' + postId + '/starCount');
-// onValue(starCountRef, (snapshot) => {
-//   const data = snapshot.val();
-//   updateStarCount(postElement, data);
-// });
+import { getUser } from "../firebase/users";
 
 function Profile() {
-  const profileData = {};
-  const editing = false;
-
-  const handleClick = () => {};
-
+  useEffect(() => {
+    getUser("1664329649852");
+  });
   return (
     <body>
       <div class="content">
@@ -60,7 +14,7 @@ function Profile() {
           <h1>Profile</h1>
         </header>
         <figure>
-          <img src={profilePic}></img>
+          <img src={profilePic} alt="Profile pic" />
         </figure>
         <h2>Name:</h2>
         <p>Person1</p>

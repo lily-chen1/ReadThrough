@@ -7,10 +7,11 @@ function Login() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   let navigate = useNavigate();
   const handleSubmit = () => {
     createUser(username, email, password);
-    let path = `profile`;
+    let path = `/profile`;
     navigate(path);
   };
 
