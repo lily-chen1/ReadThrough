@@ -1,12 +1,10 @@
 import { db } from "./firebase";
-import { ref, set } from "firebase/database";
+import { collection, getDocs } from "firebase/firestore/lite";
 
-export const createUser = (username, email, password) =>
-  set(ref(db, "users/" + username), {
-    id: new Date().getTime().toString(),
-    username: username,
-    email: email,
-    password: password,
-  });
-
-export const getUser = (id) => db.ref("users").once("value");
+export async function getUsers() {
+  const citiesCol = collection(db, "users");
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map((doc) => doc.data());
+  console.log(cityList);
+  return cityList;
+}

@@ -1,15 +1,12 @@
-import './resources/Home.css';
+import "./resources/Home.css";
 import { Link } from "react-router-dom";
 function Home() {
-    return (
+  return (
     <body>
-        <div>
-            ReadThrough
-        </div>
-        <Link to="/login">Login</Link>
-        <Link to="/profile">Profile</Link>
+      <div>ReadThrough</div>
+      <Link to="/profile">Profile</Link>
     </body>
-    );
+  );
 }
 
 export default Home;
