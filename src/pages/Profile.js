@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./resources/Profile.css";
 import profilePic from "./resources/profilePic.jpg";
-import { getUsers } from "../firebase/users";
 
 function Profile() {
   useEffect(() => {
-    console.log(getUsers());
+    console.log("test");
   });
   return (
-    <div class="content">
+    <div className="content">
       <header>
         <h1>Profile</h1>
       </header>

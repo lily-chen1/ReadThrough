@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite";
+import { getDatabase } from "firebase/database";
 
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
@@ -19,7 +19,9 @@ const firebaseConfig = {
   measurementId: "G-NS8XGRKMEE",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Initialize Realtime Database and get a reference to the service
+const db = getDatabase(app);
 
 export { db };

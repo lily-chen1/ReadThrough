@@ -2,10 +2,15 @@ import "./resources/Home.css";
 import { Link } from "react-router-dom";
 function Home() {
   return (
-    <body>
-      <div>ReadThrough</div>
-      <Link to="/profile">Profile</Link>
-    </body>
+    <div>
+      <h2>ReadThrough</h2>
+      <Link style={{ display: "block" }} to="/users">
+        Users
+      </Link>
+      <Link style={{ display: "block" }} to="/profile">
+        Profile
+      </Link>
+    </div>
   );
 }
 
