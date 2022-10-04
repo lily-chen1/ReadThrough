@@ -1,34 +1,56 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./resources/Profile.css";
-import profilePic from "./resources/profilePic.jpg";
+import { db } from "../firebase";
+import { ref, child, get } from "firebase/database";
+import { Link } from "react-router-dom";
 
 function Profile() {
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    console.log("test");
-  });
+    getUsers();
+  }, []);
+
+  async function getUsers() {
+    const dbRef = ref(db);
+    await get(child(dbRef, `users/Lily`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setUser(snapshot.val());
+          setLoading(false);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  if (loading) {
+    return;
+  }
   return (
     <div className="content">
       <header>
         <h1>Profile</h1>
       </header>
       <figure>
-        <img src={profilePic} alt="Profile pic" />
+        <img src={user.profilePic} alt="Profile pic" />
       </figure>
-      <h2>Name:</h2>
-      <p>Person1</p>
+      <h2>Username: </h2>
+      <p>{user.username}</p>
       <h2>Position:</h2>
-      <p>Writer</p>
+      <p>{user.position}</p>
       <h2>Bio:</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum
-      </p>
+      <p>{user.bio}</p>
       <button type="button">Edit Profile</button>
+      <Link style={{ display: "block", marginTop: 12 }} to="/">
+        Home
+      </Link>
+      <Link style={{ display: "block" }} to="/users">
+        Users
+      </Link>
     </div>
   );
 }

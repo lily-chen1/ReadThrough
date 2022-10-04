@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase/firebase";
+import { db } from "../firebase";
 import { ref, child, get } from "firebase/database";
 import { Link } from "react-router-dom";
 
