@@ -17,3 +17,36 @@ function App() {
 }
 
 export default App;
+
+// import PetOwnerStore from "./PetOwnerStore";
+// import PetList from "./components/PetList";
+
+// function App() {
+//   const store = new PetOwnerStore();
+//   return (
+//     <div className="App">
+//       <PetList store={store} />
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// import React from "react";
+// import { Provider, observer } from "mobx-react";
+// //import { Store } from "./store";
+// import PetOwnerStore from "./PetOwnerStore";
+
+// const store = new PetOwnerStore();
+
+// const App = () => {
+//   return (
+//     <Provider store={store}>
+//       <h1>
+//         123
+//       </h1>
+//     </Provider>
+//   );
+// };
+
+// export default App;
