@@ -8,10 +8,10 @@ function Profile() {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    getUsers();
+    getUser();
   }, []);
 
-  async function getUsers() {
+  async function getUser() {
     const dbRef = ref(db);
     await get(child(dbRef, `users/Lily`))
       .then((snapshot) => {
