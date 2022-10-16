@@ -4,6 +4,9 @@ function Home() {
   return (
     <div>
       <h2>ReadThrough</h2>
+      <Link style={{ display: "block" }} to="/setuser">
+        Set user
+      </Link>
       <Link style={{ display: "block" }} to="/users">
         Users
       </Link>
