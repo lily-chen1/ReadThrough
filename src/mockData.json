@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1,
+        "name": "Jamie",
+        "position": "Writer",
+        "goal": "Building Portfolio",
+        "genre": "Fantasy"
+    },
+    {
+        "id": 2,
+        "name": "Rebecca",
+        "position": "Costume Design",
+        "goal": "Experience",
+        "genre": "Action"
+    },
+    {
+        "id": 3,
+        "name": "Tinie",
+        "position": "Editor",
+        "goal": "Collaboration",
+        "genre": "Comedy"
+    },
+    {
+        "id": 4,
+        "name": "Justus",
+        "position": "Actor",
+        "goal": "Acting Experience",
+        "genre": "Sci-Fi"
+    },
+    {
+        "id": 5,
+        "name": "John",
+        "position": "Director",
+        "goal": "Project Planning",
+        "genre": "Mystery"
+    },
+    {
+        "id": 6,
+        "name": "Lily",
+        "position": "Actor",
+        "goal": "Collaboration",
+        "genre": "Fantasy"
+    },
+    {
+        "id": 7,
+        "name": "Guy",
+        "position": "Boss",
+        "goal": "Be a Boss",
+        "genre": "All"
+    },
+    {
+        "id": 8,
+        "name": "Alan",
+        "position": "Writer",
+        "goal": "Scriptwriting",
+        "genre": "Romance"
+    },
+    {
+        "id": 9,
+        "name": "Alex",
+        "position": "Costume Design",
+        "goal": "Building Portfolio",
+        "genre": "Fantasy"
+    },
+    {
+        "id": 10,
+        "name": "Jonathan",
+        "position": "Writer",
+        "goal": "Scriptwriting",
+        "genre": "Drama"
+    },
+    {
+        "id": 11,
+        "name": "Aubrey",
+        "position": "Stage Crew",
+        "goal": "Leadership",
+        "genre": "Mystery"
+    }
+
+]
