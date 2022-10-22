@@ -3,6 +3,7 @@ import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Users from "./pages/Users";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<Users />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/userprofile/:username" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   );
