@@ -4,7 +4,6 @@ import { db } from "../firebase";
 import { ref, child, get } from "firebase/database";
 import { Link } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import { compose } from "recompose";
 
 function SetUser(props) {
   const { userStore } = props;
@@ -61,4 +60,4 @@ function SetUser(props) {
   );
 }
 
-export default compose(inject("userStore"), observer)(SetUser);
+export default inject("userStore")(SetUser);
