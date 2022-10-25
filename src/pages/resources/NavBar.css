@@ -1,0 +1,18 @@
+.navigation {
+    height: 60px;
+    width: 100%;
+    /* list-style-type: none; */
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.5rem 0rem;
+    background-color: #fff;
+    color: black;
+}
+
+.ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
