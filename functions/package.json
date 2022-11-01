@@ -13,8 +13,10 @@
   },
   "main": "index.js",
   "dependencies": {
+    "@babel/runtime": "^7.20.1",
     "firebase-admin": "^10.0.2",
-    "firebase-functions": "^4.0.1"
+    "firebase-functions": "^4.0.1",
+    "typesense": "^1.4.2"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"
