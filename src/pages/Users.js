@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { ref, child, get } from "firebase/database";
+// import { ref, child, get } from "firebase/database";
+import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
 function Users() {
@@ -11,13 +12,19 @@ function Users() {
   }, []);
 
   async function getUsers() {
-    const dbRef = ref(db);
-    await get(child(dbRef, `users`))
+    //const dbRef = ref(db);
+    await getDocs(collection(db, "users"))
       .then((snapshot) => {
-        if (snapshot.exists()) {
-          setUsers(snapshot.val());
+        if (snapshot.docs.length > 0) {
+          const doc_array = [];
+          snapshot.docs.forEach(doc => {
+              // doc is a DocumentSnapshot with actual data
+              doc_array.push(doc.data());
+          })
+          setUsers(doc_array);
           setLoading(false);
-        } else {
+        }  
+        else {
           console.log("No data available");
         }
       })

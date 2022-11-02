@@ -3,8 +3,53 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './resources/NavBar.css';
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 function NavBar() {
+    const AddScript = () => {
+        const title = prompt("title ?");
+        const authorID = prompt("authorID?");
+        const authorName = prompt("authorName?");
+        const writerExp = prompt("writer Experience?");
+        const genre1 = prompt("genre 1?");
+        const genre2 = prompt("genre 2?");
+        const genres = [];
+        if (genre1 != ""){
+            genres.push(genre1);
+        }
+        if (genre2 != ""){
+            genres.push(genre2);
+        }
+        const logline = prompt("logline?");
+        const link = prompt("link?");
+        const tag1 = prompt("tag 1?");
+        const tag2 = prompt("tag 2?");
+        const tags = [];
+        if (tag1 != ""){
+            tags.push(tag1);
+        }
+        if (tag2 != ""){
+            tags.push(tag2);
+        }
+        addDoc(collection(db, "scripts"), {
+            title: title,
+            authorID: authorID,
+            authorName: authorName,
+            writerExp: writerExp,
+            genre: genres,
+            logline: logline,
+            link: link,
+            tags: tags
+        })
+        .then((docRef)=> {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
     return (
         // <Navbar>
         //     <Container>
@@ -44,6 +89,8 @@ function NavBar() {
         // </div>
         // </nav>
 
+        
+
         <div className="navigation">
             <ul>
             <li className="navItem">
@@ -57,6 +104,9 @@ function NavBar() {
             </li>
             <li className="navItem">
                 <a href="/profile">Profile</a>
+            </li>
+            <li className="navItem">
+                <a href="/searchresults">Script Search</a>, <Link onClick={AddScript} to="/searchresults">Add Script</Link>
             </li>
             </ul>
         </div>

@@ -1,11 +1,45 @@
 import {useState, useEffect} from "react";
 import '../SearchResults.css';
 import Data from "../mockData.json";
+import { db } from "../firebase";
+//import { ref, child, get } from "firebase/database";
+import { collection, getDocs} from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 
 // Note: the empty deps array [] means
 // this useEffect will run once
 function SearchResults() {
+  //Getting Scripts from DB
+  const [scripts, setScripts] = useState({});
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+      getScripts();
+  }, []);
+
+  async function getScripts() {
+      //const dbRef = ref(db);
+      await getDocs(collection(db, "scripts"))
+      .then((snapshot) => {
+          if (snapshot.docs.length > 0) {
+          const doc_array = [];
+          snapshot.docs.forEach(doc => {
+              // doc is a DocumentSnapshot with actual data
+              doc_array.push(doc.data());
+          })
+          setScripts(doc_array);
+          setLoading(false);
+          }  
+          else {
+          console.log("No data available");
+          }
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  }
+
+//########################
   const [error, setError] = useState(null);
   //const [loaded, setLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -51,6 +85,10 @@ function SearchResults() {
   } else {
       return (
           <div className="wrapper">
+            <div>
+            {console.log(scripts)}
+            <ScriptList scripts={scripts} />
+            </div>
               <div className="search-wrapper">
                   <label htmlFor="search-form">
                       <input
@@ -129,5 +167,14 @@ function SearchResults() {
       );
   }
 }
+
+const ScriptList = ({ scripts }) => (
+    <div>
+      <h2>List of scripts</h2>
+      {Object.keys(scripts).map((key) => (
+        <div key={key}>{scripts[key].title+","+scripts[key].authorName+","+scripts[key].genre}</div>
+      ))}
+    </div>
+  );
 
 export default SearchResults;
