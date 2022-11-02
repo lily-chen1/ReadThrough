@@ -6,25 +6,28 @@ import './resources/NavBar.css';
 
 function Home() {
   return (
-    <div>
-      <NavBar />
-    </div>
-
     // <div>
-    //   <h2>ReadThrough</h2>
-    //   <Link style={{ display: "block" }} to="/setuser">
-    //     Set user
-    //   </Link>
-    //   <Link style={{ display: "block" }} to="/users">
-    //     Users
-    //   </Link>
-    //   <Link style={{ display: "block" }} to="/profile">
-    //     Profile
-    //   </Link>
-    //   <Link style={{ display: "block" }} to="/SearchResults">
-    //     Search
-    //   </Link>
+    //   <NavBar />
     // </div>
+
+    <div>
+      <h2>ReadThrough</h2>
+      <Link style={{ display: "block" }} to="/setuser">
+        Set user
+      </Link>
+      <Link style={{ display: "block" }} to="/users">
+        Users
+      </Link>
+      <Link style={{ display: "block" }} to="/profile">
+        Profile
+      </Link>
+      <Link style={{ display: "block" }} to="/SearchResults">
+        Search
+      </Link>
+      <Link style={{ display: "block" }} to="/Scriptsearch">
+        Search Scripts
+      </Link>
+    </div>
   );
 }
 
