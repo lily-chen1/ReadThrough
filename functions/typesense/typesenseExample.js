@@ -20,47 +20,38 @@ module.exports = (async () => {
 
   const schema = {
     name: "scripts",
-    num_documents: 0,
     fields: [
       {
         name: "authorID",
-        type: "string",
-        facet: false,
+        type: "string"
       },
       {
         name: "authorName",
-        type: "string",
-        facet: false,
+        type: "string"
       },
       {
         name: "genre",
-        type: "string[]",
-        facet: true,
+        type: "string[]"
+      },
+      {
+        name: "link",
+        type: "string"
       },
       {
         name: "logline",
-        type: "string",
-        facet: false,
-      },
-      {
-        name: "scriptLink",
-        type: "string",
-        facet: false,
+        type: "string"
       },
       {
         name: "tags",
-        type: "string[]",
-        facet: true,
+        type: "string[]"
       },
       {
         name: "title",
-        type: "string",
-        facet: false,
+        type: "string"
       },
       {
         name: "writerExperience",
-        type: "float",
-        facet: false,
+        type: "int32"
       },
     ],
     default_sorting_field: "writerExperience",
@@ -80,6 +71,8 @@ module.exports = (async () => {
     await typesense.collections().create(schema);
   } catch (err) {
     //console.error(err);
+    //await typesense.collections("scripts").delete();
+    //await typesense.collections().create(schema);
   }
   
   try {
@@ -93,7 +86,7 @@ module.exports = (async () => {
   }
 
     let search = {
-        'q' : '12 Angry Men',
+        'q' : '',
         'query_by': 'title',
     }
 
@@ -102,6 +95,7 @@ module.exports = (async () => {
     .search(search)
     .then(function (searchResults) {
         console.log(searchResults)
+        //console.log(searchResults.hits[0].document)
     })
 
 })();
