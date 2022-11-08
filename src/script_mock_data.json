@@ -3,14 +3,16 @@
     {
         "id": 11,
         "title": "Citizen Kane",
-        "author": "Orson Welles",
+        "authorName": "Orson Welles",
+        "authorID": 301,
         "logline": "Rosebud, mirrors, yadiyadiyadadadada alallalalala",
         "genres": ["Drama", "Mystery"]
     },
     {
         "id": 12,
         "title": "Psycho",
-        "author": "Alfred Hitchcock",
+        "authorName": "Alfred Hitchcock",
+        "authorID": 302,
         "logline": "Norman is not actually normal, he loves his mom a lot, pycho stuff, yadiyadiyadadadada alallalalala",
         "genres": ["Horror"]
 
@@ -18,14 +20,16 @@
     {
         "id": 13,
         "title": "Grand Budapest Hotel",
-        "author": "Wes Anderson",
+        "authorName": "Wes Anderson",
+        "authorID": 303,
         "logline": "A man and a butler, Saoirse Ronan is in it, yadiyadiyadadadada alallalalala",
         "genres": ["Comendy", "Mystery"]
     },
     {
         "id": 14,
         "title": "Generic Romcom",
-        "author": "Probably Nicolas Sparks",
+        "authorName": "Probably Nicolas Sparks",
+        "authorID": 304,
         "logline": "Love and kissing, yadiyadiyadadadada alallalalala",
         "genres": ["Romance"]
 
@@ -34,22 +38,24 @@
     {
         "id": 15,
         "title": "Movie Title",
-        "author": "My mom",
+        "authorName": "My mom",
+        "authorID": 305,
         "logline": "weeewooo, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean comlemodo ligula eget dolor. ",
-        "genre1": "Romance",
-        "genre2": "Action"
+        "genres": ["Romance", "Comedy"]
     },
     {
         "id": 16,
         "title": "Movie Title",
-        "author": "My mom",
+        "authorName": "My mom",
+        "authorID": 306,
         "logline": "weeewooo, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean comlemodo ligula eget dolor. ",
         "genres": ["Western"]
     },
     {
         "id": 17,
         "title": "Movie Title",
-        "author": "My mom",
+        "authorName": "My mom",
+        "authorID": 307,
         "logline": "weeewooo, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean comlemodo ligula eget dolor. ",
         "genre1": "Documentary",
         "genres": ["History"]
@@ -57,7 +63,8 @@
     {
         "id": 18,
         "title": "Movie Title",
-        "author": "My mom",
+        "authorName": "My mom",
+        "authorID": 308,
         "logline": "weeewooo, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean comlemodo ligula eget dolor. ",
         "genres": ["Fantasy", "Short"]
 
@@ -65,7 +72,8 @@
     {
         "id": 19,
         "title": "Movie Title",
-        "author": "My mom",
+        "authorName": "My mom",
+        "authorID": 309,
         "logline": "weeewooo, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean comlemodo ligula eget dolor. ",
         "genres": ["Indie", "Short"]
 
@@ -73,21 +81,24 @@
     {
         "id": 20,
         "title": "Movie Title",
-        "author": "My mom",
+        "authorName": "My mom",
+        "authorID": 310,
         "logline": "weeewooo, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean comlemodo ligula eget dolor. ",
         "genres": ["Indie"]
     },
     {
         "id": 21,
         "title": "Movie Title",
-        "author": "My mom",
+        "authorName": "My mom",
+        "authorID": 311,
         "logline": "weeewooo, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean comlemodo ligula eget dolor. ",
         "genres": ["Noir", "Drama"]
     },
     {
         "id": 22,
         "title": "Movie Title",
-        "author": "My mom",
+        "authorName": "My mom",
+        "authorID": 312,
         "logline": "weeewooo, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean comlemodo ligula eget dolor. ",
         "genres": ["Sci-fi","Romance"]
     }

@@ -1,15 +1,10 @@
 import "./resources/Home.css";
 import { Link } from "react-router-dom"; 
-import NavBar from "./NavBar";
 import './resources/NavBar.css';
 
 
 function Home() {
   return (
-    // <div>
-    //   <NavBar />
-    // </div>
-
     <div>
       <h2>ReadThrough</h2>
       <Link style={{ display: "block" }} to="/setuser">
@@ -24,8 +19,8 @@ function Home() {
       <Link style={{ display: "block" }} to="/SearchResults">
         Search
       </Link>
-      <Link style={{ display: "block" }} to="/Scriptsearch">
-        Search Scripts
+      <Link style={{ display: "block" }} to="/ScriptDisplay">
+        Script Display
       </Link>
     </div>
   );
