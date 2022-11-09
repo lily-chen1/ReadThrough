@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 function ScriptDisplay() {
     const [scripts, setScripts] = useState({});
     const [loading, setLoading] = useState(true);
+    const [paginate, setPaginate] = useState(8);
+    const [favorite, setFav] = useState([]);
     
     useEffect(() => {
         getScripts();
@@ -38,22 +40,39 @@ function ScriptDisplay() {
     }
 
 
-
-    const [paginate, setPaginate] = useState(8);
-    const [favorite, setFav] = useState([]);
-
     const load_more = (event) => {
         setPaginate((prevValue) => prevValue+8)
     }
 
-    // const star = (event) => {
-    //     setFav
-    // }
 
     return (
         <div className="container">
+            <h2>Real data from firebase!</h2>
             <ul className="card-grid">
-                {Data.slice(0, 8).map((item) => (
+                {scripts.slice(0, paginate).map((item) => (
+                    <li key={item.id}>
+                        <article className="card">
+                            <div className="card-content">
+                                <div class="header">
+                                    <h4>{item.title}</h4>
+                                    Author:{" "} <span>{item.authorName}</span>
+                                </div>
+                                <ol className="card-list">
+                                    <li>
+                                        Logline:{" "} <span>{item.logline}</span>
+                                    </li>
+                                    <li>
+                                        <p class="tag">{item.genre[0]}</p>
+                                    </li>
+                                </ol>
+                            </div>
+                        </article>
+                    </li>
+                ))}
+            </ul>
+            <h2>Not-so real data!</h2>
+            <ul className="card-grid">
+                {Data.slice(0, paginate).map((item) => (
                     <li key={item.id}>
                         <article className="card">
                             <div className="card-content">
