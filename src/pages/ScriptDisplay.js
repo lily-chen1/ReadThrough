@@ -1,39 +1,32 @@
 import {useState} from "react";
-// import '../resources/scriptDisplay.css';
+import './resources/ScriptDisplay.css';
 import Data from "../script_mock_data.json";
 
 
 function ScriptDisplay() {
-  const [paginate, setPaginate] = useState(8);
+    // const [paginate, setPaginate] = useState(8);
 
-  const load_more = (event) => {
-    setPaginate((prevValue) => prevValue+8)
-  }
-
-
+    // const load_more = (event) => {
+    //     setPaginate((prevValue) => prevValue+8)
+    // }
 
     return (
-        <div className="wrapper">
+        <div className="container">
             <ul className="card-grid">
-                {Data.slice(0, paginate).map((item) => (
+                {Data.slice(0, 8).map((item) => (
                     <li key={item.id}>
                         <article className="card">
-                            <div className="card-image">
-                                <img
-                                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
-                                />
-                            </div>
                             <div className="card-content">
-                                <h2 className="card-name">{item.title}</h2>
+                                <div class="header">
+                                    <h4>{item.title}</h4>
+                                    Author:{" "} <span>{item.authorName}</span>
+                                </div>
                                 <ol className="card-list">
-                                    <li>
-                                        Author:{" "} <span>{item.authorName}</span>
-                                    </li>
                                     <li>
                                         Logline:{" "} <span>{item.logline}</span>
                                     </li>
                                     <li>
-                                        Genre:{" "} <span>{item.genre}</span>
+                                        {/* Genre:{" "} <span>{item.genre[0]}</span> */}
                                     </li>
                                 </ol>
                             </div>
@@ -41,7 +34,7 @@ function ScriptDisplay() {
                     </li>
                 ))}
             </ul>
-            <button onClick={load_more}>Load More</button>
+            {/* <button onClick={load_more}>Load More</button> */}
         </div>
     );
 }
