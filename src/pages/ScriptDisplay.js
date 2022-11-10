@@ -49,20 +49,20 @@ function ScriptDisplay() {
         <div className="container">
             <h2>Real data from firebase!</h2>
             <ul className="card-grid">
-                {scripts.slice(0, paginate).map((item) => (
-                    <li key={item.id}>
+                {Object.keys(scripts).map((key) => (
+                    <li key={key}>
                         <article className="card">
                             <div className="card-content">
                                 <div class="header">
-                                    <h4>{item.title}</h4>
-                                    Author:{" "} <span>{item.authorName}</span>
+                                    <h4>{scripts[key].title}</h4>
+                                    Author:{" "} <span>{scripts[key].authorName}</span>
                                 </div>
                                 <ol className="card-list">
                                     <li>
-                                        Logline:{" "} <span>{item.logline}</span>
+                                        Logline:{" "} <span>{scripts[key].logline}</span>
                                     </li>
                                     <li>
-                                        <p class="tag">{item.genre[0]}</p>
+                                        <span>{scripts[key].genre[0]}, {scripts[key].tags[0]}</span>
                                     </li>
                                 </ol>
                             </div>
@@ -85,7 +85,7 @@ function ScriptDisplay() {
                                         Logline:{" "} <span>{item.logline}</span>
                                     </li>
                                     <li>
-                                        {/* Genre:{" "} <span>{item.genre[0]}</span> */}
+                                        <span>{item.genres[0]}</span>
                                     </li>
                                 </ol>
                             </div>
@@ -97,4 +97,14 @@ function ScriptDisplay() {
         </div>
     );
 }
+
+const ScriptList = ({ scripts }) => (
+    <div>
+      <h2>List of scripts</h2>
+      {Object.keys(scripts).map((key) => (
+        <div key={key}>{scripts[key].title+","+scripts[key].authorName+","+scripts[key].genre}</div>
+      ))}
+    </div>
+  );
+
 export default ScriptDisplay;
