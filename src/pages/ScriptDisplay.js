@@ -7,6 +7,8 @@ import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import Select from "react-select";
+import Slider from '@mui/material/Slider';
+
 
 function ScriptDisplay() {
   const [error, setError] = useState(null);
@@ -57,6 +59,8 @@ function ScriptDisplay() {
   const filter_writer_experience = [
     ...new Set(scripts.map((item) => item.writerExperience)),
   ];
+  const filter_lengths = [...new Set(scripts.map((item) => item.length))];
+
 
   const filter_genre_objects = [
     ...filter_unique_genres.map(
@@ -84,50 +88,52 @@ function ScriptDisplay() {
     ),
   ];
 
+  //For filtering length range:
+  const max = Math.max(...filter_lengths);
+  const [value, setValue] = useState([0, 1000]);
+  
+  const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
+
   const load_more = (event) => {
     setPaginate((prevValue) => prevValue + 8);
   };
 
-  function filterAll(items) {
-    // all filters applied, no search
-    return items.filter((item) => {
-      const filterKeys = Object.keys(filter);
-
-      return filterKeys.every((key) => {
-        if (!filter[key].length) {
-          //if no filters, just show results based on search
-          return search_parameters.some((parameter) =>
-            item[parameter].toString().toLowerCase().includes(query)
-          ); //if there are any filters
-        }
-        //else, return based on filters and search parameters
-        else {
-          console.log("Item at key: ", item[key]);
-          if (Array.isArray(item[key])) {
-            for (var i = 0; i < item[key].length; i++) {
-              console.log("Item at key[i]: ", item[key][i]);
-              if (filter[key].includes(item[key][i])) {
-                return (
-                  filter[key].includes(item[key][i]) &&
-                  search_parameters.some((parameter) =>
-                    item[parameter].toString().toLowerCase().includes(query)
-                  )
-                );
+  
+  function filterAll(items) { //all filters applied, no search
+    return items.filter(
+      (item) => {
+        const filterKeys = Object.keys(filter);
+        
+        return filterKeys.every(key => {
+          //console.log("Filter[key]", filter[key])
+          if (!filter[key].length) { //if no filters, just show results based on search
+            return search_parameters.some((parameter) => item[parameter].toString().toLowerCase().includes(query)) && item.length >= value[0] && item.length <= value[1]; //if there are any filters
+          }
+          //else, return based on filters and search parameters
+          else{
+            console.log("Item at key: ", item[key])
+            if (Array.isArray(item[key])){
+              for (var i = 0; i < item[key].length; i++){
+                console.log("Item at key[i]: ", item[key][i])
+                if (filter[key].includes(item[key][i]))
+                {
+                  return filter[key].includes(item[key][i]) && search_parameters.some((parameter) =>
+                  item[parameter].toString().toLowerCase().includes(query)) && item.length >= value[0] && item.length <= value[1]
+                }
+               
               }
             }
-          } else {
-            return (
-              filter[key].includes(item[key]) &&
-              search_parameters.some((parameter) =>
-                item[parameter].toString().toLowerCase().includes(query)
-              )
-            );
+            else {
+              return filter[key].includes(item[key]) && search_parameters.some((parameter) =>
+              item[parameter].toString().toLowerCase().includes(query))
+            }
           }
-        }
-      });
-    });
+      }
+    );
   }
-
+)}
   function handleGenreFilters(items) {
     const genres = [...new Set(items.map((e) => e.value))];
     console.log("Genres: ", genres);
@@ -264,7 +270,16 @@ function ScriptDisplay() {
                 }}
               />
             </div>
-
+            <div className="col-sm filter-column" id="filter-selection-4">
+            <Slider
+                  value={value}
+                  min={0}
+                  max={1000}
+                  onChange={handleChange}
+                  valueLabelDisplay="on"
+                  >
+              </Slider>
+            </div>
             <span className="focus"></span>
           </div>
         </div>
