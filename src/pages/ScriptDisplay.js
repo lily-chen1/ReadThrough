@@ -10,6 +10,7 @@ import Select from "react-select";
 import Slider from '@mui/material/Slider';
 
 
+
 function ScriptDisplay() {
   const [error, setError] = useState(null);
   const [scripts, setScripts] = useState([]);
@@ -307,6 +308,9 @@ function ScriptDisplay() {
                         {item.genres.map((genre) => (
                           <span className="genre-tag">{genre}</span>
                         ))}
+                      </div>
+                      <div>
+                          <button className="favoriteButt" onClick={add_favorite}></button>
                       </div>
                     </div>
                   </article>
