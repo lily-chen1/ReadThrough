@@ -1,4 +1,4 @@
-import "./resources/ScriptDisplay.css";
+import "./resources/scriptDisplay.css";
 import Data from "../script_mock_data.json";
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
