@@ -22,7 +22,6 @@ function ScriptDisplay() {
   });
   const [loading, setLoading] = useState(true);
   const [paginate, setPaginate] = useState(8);
-  const [favorite, setFav] = useState([]);
 
   useEffect(() => {
     getScripts();
@@ -48,6 +47,31 @@ function ScriptDisplay() {
         console.error(error);
       });
   }
+
+  // ===== FAVORITE FEATURE =====
+  const [favorite, setFav] = useState([]);
+
+  const add_favorite = item => {
+    if (!favorite.includes(item)) setFav(favorite.concat(item));
+    console.log(item);
+  };
+
+  const removeFavorite = item => {
+    let index = favorite.indexOf(item);
+    console.log(index);
+    let temp = [...favorite.slice(0, index), ...favorite.slice(index + 1)];
+    setFav(temp);
+  };
+
+  // let favoriteScripts = scripts.filter(script => favorite.includes(script));
+
+  // let filtered = recipes.filter(recipe => {
+  //   if (searchTerm === "") {
+  //     return recipe;
+  //   } else if (recipe.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+  //     return recipe;
+  //   }
+  // });
 
   console.log("Scripts: ", scripts);
   const search_parameters = Object.keys(Object.assign({}, ...scripts));
@@ -190,7 +214,6 @@ function ScriptDisplay() {
             <span className="search-only">Search for People</span>
           </label>
         </div>
-
         <div className="container filters">
           <div className="row filter-row">
             <div className="col-sm filter-column" id="filter-selection-1">
@@ -271,6 +294,9 @@ function ScriptDisplay() {
                 }}
               />
             </div>
+            <div className="col-sm filter-column" id="filter-selection-5">
+              <button class="filterFavs">Favorites</button>
+            </div>
             <div className="col-sm filter-column" id="filter-selection-4">
             <Slider
                   value={value}
@@ -284,6 +310,11 @@ function ScriptDisplay() {
             <span className="focus"></span>
           </div>
         </div>
+        <div>
+          {favorite.slice().map((item => (
+            <li>{item.title}</li>
+          )))}
+        </div>
         <div className="container">
           <ul className="card-grid">
             {filterAll(scripts)
@@ -294,7 +325,7 @@ function ScriptDisplay() {
                     <div className="card-content">
                       <div class="header">
                         <h4 className="script-title">{item.title}</h4>
-                        Author:{" "}
+                        {" "}
                         <span className="script-author">{item.authorName}</span>
                       </div>
                       <ol className="card-list">
@@ -308,16 +339,17 @@ function ScriptDisplay() {
                         {item.genres.map((genre) => (
                           <span className="genre-tag">{genre}</span>
                         ))}
+                        <div>
+                          <button className="favorite-butt" onClick = {() => add_favorite(item)}>Add to Favorites</button>
+                        </div>
                       </div>
-                      <div>
-                          <button className="favoriteButt" onClick={add_favorite}></button>
-                      </div>
+                      
                     </div>
                   </article>
                 </li>
               ))}
           </ul>
-          <button onClick={load_more}>Load More</button>
+          <button className ="load-butt" onClick={load_more}>Load More</button>
         </div>
       </div>
     );
