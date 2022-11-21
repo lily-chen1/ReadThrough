@@ -1,7 +1,6 @@
 import "./resources/Home.css";
-import { Link } from "react-router-dom"; 
-import './resources/NavBar.css';
-
+import { Link } from "react-router-dom";
+import "./resources/NavBar.css";
 
 function Home() {
   return (
@@ -21,6 +20,9 @@ function Home() {
       </Link>
       <Link style={{ display: "block" }} to="/ScriptDisplay">
         Script Display
+      </Link>
+      <Link style={{ display: "block" }} to="/typesensetest">
+        Typesense Test
       </Link>
     </div>
   );

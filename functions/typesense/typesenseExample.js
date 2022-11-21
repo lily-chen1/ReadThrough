@@ -23,38 +23,42 @@ module.exports = (async () => {
     fields: [
       {
         name: "authorID",
-        type: "string"
+        type: "string",
       },
       {
         name: "authorName",
-        type: "string"
+        type: "string",
       },
       {
-        name: "genre",
-        type: "string[]"
+        name: "genres",
+        type: "string[]",
+        facet: true,
+      },
+      {
+        name: "length",
+        type: "int32",
       },
       {
         name: "link",
-        type: "string"
+        type: "string",
       },
       {
         name: "logline",
-        type: "string"
+        type: "string",
       },
       {
-        name: "tags",
-        type: "string[]"
+        name: "scriptType",
+        type: "string",
       },
       {
         name: "title",
-        type: "string"
+        type: "string",
       },
       {
         name: "writerExperience",
-        type: "int32"
+        type: "string",
       },
     ],
-    default_sorting_field: "writerExperience",
   };
 
   try {
@@ -67,6 +71,7 @@ module.exports = (async () => {
 
   console.log(JSON.stringify(schema, null, 2));
 
+  //await typesense.collections("scripts").delete();
   try {
     await typesense.collections().create(schema);
   } catch (err) {
@@ -74,28 +79,26 @@ module.exports = (async () => {
     //await typesense.collections("scripts").delete();
     //await typesense.collections().create(schema);
   }
-  
+
   try {
-    const returnData = await typesense
-      .collections("scripts")
-      .documents();
+    const returnData = await typesense.collections("scripts").documents();
 
     console.log("Return data: ", returnData);
   } catch (err) {
     console.error(err);
   }
 
-    let search = {
-        'q' : '',
-        'query_by': 'title',
-    }
+  let search = {
+    q: "",
+    query_by: "title",
+  };
 
-    typesense.collections('scripts')
+  typesense
+    .collections("scripts")
     .documents()
     .search(search)
     .then(function (searchResults) {
-        console.log(searchResults)
-        //console.log(searchResults.hits[0].document)
-    })
-
+      console.log(searchResults);
+      //console.log(searchResults.hits[0].document)
+    });
 })();
