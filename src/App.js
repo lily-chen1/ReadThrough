@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Users from "./pages/Users";
 import SearchResults from "./pages/SearchResults";
 import ScriptDisplay from "./pages/ScriptDisplay";
-
+import ScriptFunctions from "./pages/ScriptFunctions";
 
 const App = () => (
   <BrowserRouter>
@@ -17,6 +17,7 @@ const App = () => (
       <Route path="/profile" element={<Profile />} />
       <Route path="/searchresults" element={<SearchResults />} />
       <Route path="/scriptDisplay" element={<ScriptDisplay />} />
+      <Route path="/scriptFunctions" element={<ScriptFunctions />} />
     </Routes>
   </BrowserRouter>
 );
