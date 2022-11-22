@@ -4,6 +4,19 @@
     margin: 0;
     padding: 0;
 }
+.search-only {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important;
+}
 img {
   width: 150px;
   height: 150px;
@@ -20,23 +33,34 @@ ol {
     list-style: none;
 }
 body {
-    background: var(--bg);
+    background: #f6f4ed;
     font-family: sans-serif;
+    color: #544d41;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 14px;
 }
 
-.container {
+.heading {
+    margin-top: 0.5em;
+}
+
+.wrapper {
     width: 96%;
-    max-width: 1140px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
+.wrapper-inner {
+    max-width: 600px;
+    text-align: center;
+}
+
+/* script/user cards */
 .card-grid {
     margin: 2em 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 48px;
 }
 .card {
@@ -44,21 +68,26 @@ body {
     padding: 0px;
     box-shadow: 0px 2px 4px var(--border);
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    border-radius: 15px;
 }
 .card:hover {
     transform: scale(1.1);
 }
 .card:hover .card-content h2 {
     display: block;
-    -webkit-line-clamp: none;
-    -webkit-box-orient: none;
+   
     overflow: visible;
 }
-
-.header {
+.card-image {
+    max-height: 150px;
+    overflow: hidden;
+}
+.card-image img {
+    margin-top: -13px;
+    min-height: 100%;
     width: 100%;
-    white-space: nowrap;
-    overflow-x: auto;
+    object-fit: cover;
+    object-position: center;
 }
 
 .header h4 {
@@ -73,7 +102,13 @@ body {
 }
 
 .card-content {
-    padding: 32px 15px;
+    padding: 15px 15px 15px 15px;
+}
+.card-content h2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card-list {
@@ -86,10 +121,94 @@ body {
 }
 .card-list li span {
     color: var(--gray);
-    overflow: hidden;
 }
 
-button {
+/* search input */
+.searchHeader {
+    margin:10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 375px) {
+    .searchHeader {
+        justify-content: start;
+        flex-wrap: wrap;
+    }
+    .select {
+        margin-top: 3.5em;
+    }
+}
+
+.search-input {
+    background-color: #fdfcf9;
+    color: #c3b8a6;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    box-shadow: 0px 4px 6px var(--border);
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    width:500px;
+    height: 1.5em;
+}
+.search-input:hover {
+    box-shadow: 0px 0px 0px var(--border);
+}
+/* select from moderncss.dev */
+select {
+    appearance: none !important;
+    outline: none;
+    background-color: var(--bg-offset);
+    border-radius: 0.25em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--border);
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    color: var(--gray);
+}
+.select {
+    min-width: 15ch;
+    max-width: 30ch;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: transparent;
+    display: grid;
+    grid-template-areas: "select";
+    align-items: center;
+    position: relative;
+    box-shadow: 0px 4px 6px var(--border);
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.select:hover {
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+.select::after {
+    content: "";
+    display: block;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--text);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    justify-self: end;
+}
+select,
+.select:after {
+    grid-area: select;
+}
+select:focus + .focus {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 2px solid var(--text);
+    border-radius: inherit;
+}
+
+.load-butt {
     display: block;
     margin-top: 2rem;
     margin-bottom: 3rem;
@@ -98,8 +217,106 @@ button {
     margin-left: auto;
     margin-right: auto;
     border-radius: 40px;
-    background-color: #00bb00;
-    border: 1px solid #00aa00;
+    background-color: #5C6ABB;
+    border: 1px solid #5C6ABB;
     color: #fff;
     cursor: pointer;
 }
+
+/* style for filters */
+.filters{
+    margin: 5px;
+}
+.filter-column {
+    display: inline-block;
+    flex-direction: column;
+    margin: 5px;
+    flex: 80%
+}
+.filter-row{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.filterFavs {
+    background-color: #EDEBE3;
+    border-radius: 10px;
+    border-color: var(--gray);
+    margin: 0px;
+    width: 80%;
+    color: var(--gray);
+    text-align: left;
+    vertical-align: middle;
+    font-size: inherit
+}
+
+/* style for script cards */
+.script-title{
+    color:#908166 !important;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.script-author{
+    color: #938162;
+}
+
+.script-logline{
+    color: #000000;
+    font-weight: 500;
+}
+
+
+.tag-list{
+    padding: 0.5em 0em;
+}
+
+.script-tag {
+    display: inline-block;
+    background-color: #5C6ABB;
+    color: #FFFFFF;
+    padding: 0.2em 0.4em;
+    border-radius: 0.2em;
+    font-size: 0.9em;
+    margin: 0 0.2em;
+    /* font-family: monospace; */
+}
+
+.genre-tag {
+    display: inline-block;
+    background-color: #A29983;
+    color: #FFFFFF;
+    padding: 0.2em 0.4em;
+    border-radius: 0.2em;
+    font-size: 0.9em;
+    margin: 0 0.2em;
+    /* font-family: monospace; */
+}
+
+.favorite-div {
+    padding: 0.5em 0em;
+
+}
+
+.favorite-butt {
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+    font-size: 1.4rem;
+    border-radius: 0.2em;
+    background-color: #5C6ABB;
+    border: 1px solid #5C6ABB;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.2em 0.4em;
+    font-size: 0.9em;
+}
+
+
+
+#filter-selection-2, #filter-selection-1, #filter-selection-3, #filter-selection-4, #filter-selection-5 {
+    margin: 5px;
+    width: 80%
+}
+
