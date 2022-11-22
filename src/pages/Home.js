@@ -22,6 +22,9 @@ function Home() {
       <Link style={{ display: "block" }} to="/ScriptDisplay">
         Script Display
       </Link>
+      <Link style={{ display: "block" }} to="/ScriptFunctions">
+        Script Review
+      </Link>
     </div>
   );
 }
