@@ -310,7 +310,6 @@ function ScriptDisplay() {
                 color="primary"
                 value="Favorit"
                 exclusive
-                aria-label="Platform"
               >
               </ToggleButton>
             </div>
