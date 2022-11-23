@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import Select from "react-select";
 import Slider from '@mui/material/Slider';
-import { ToggleButton } from "react-bootstrap";
+import { ToggleButton } from '@adobe/react-spectrum';
 
 
 
@@ -58,16 +58,24 @@ function ScriptDisplay() {
   const [isFav, fav_toggle] = useState(false);
 
   const add_favorite = item => {
-    if (!favorite_arr.includes(item)) setFav(favorite_arr.concat(item));
-    console.log(item);
+    
   };
 
-  const removeFavorite = item => {
-    let index = favorite_arr.indexOf(item);
-    console.log(index);
-    let temp = [...favorite_arr.slice(0, index), ...favorite_arr.slice(index + 1)];
-    setFav(temp);
-  };
+
+  function handle_change_favs(item){
+    if (favorite_arr.includes(item)) {
+      let index = favorite_arr.indexOf(item);
+      console.log(index);
+      let temp = [...favorite_arr.slice(0, index), ...favorite_arr.slice(index + 1)];
+      setFav(temp);
+      console.log(item.title, " removed from favorites");
+
+    }
+    else {
+      if (!favorite_arr.includes(item)) setFav(favorite_arr.concat(item));
+      console.log(item.title, " added to favorites");
+    }
+  }
 
   function handleFavs() {
     if (isFav == false) {
@@ -305,13 +313,7 @@ function ScriptDisplay() {
             </div>
             <div className="col-sm filter-column" id="filter-selection-5">
               {/* <button class="filterFavs" onClick={selectFavs}>Favorites</button> */}
-              <ToggleButton
-                onChange={handleFavs}
-                color="primary"
-                value="Favorit"
-                exclusive
-              >
-              </ToggleButton>
+              <ToggleButton onChange={handleFavs}> Favorites </ToggleButton>
             </div>
             <div className="col-sm filter-column" id="filter-selection-4">
             <Slider
@@ -351,7 +353,7 @@ function ScriptDisplay() {
                           <span className="genre-tag">{genre}</span>
                         ))}
                         <div>
-                          <button className="favorite-butt" onClick = {() => add_favorite(item)}>Add to Favorites</button>
+                          <button className="favorite-butt" onClick = {() => handle_change_favs(item)}>Add/Remove to Favorites</button>
                         </div>
                       </div>
                       
