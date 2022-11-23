@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import Select from "react-select";
 import Slider from '@mui/material/Slider';
+import { ToggleButton } from "react-bootstrap";
 
 
 
 function ScriptDisplay() {
   const [error, setError] = useState(null);
+  const [allScripts, set_all_scripts] = useState([]);
   const [scripts, setScripts] = useState([]);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState({
@@ -37,6 +39,7 @@ function ScriptDisplay() {
             // doc is a DocumentSnapshot with actual data
             doc_array.push(doc.data());
           });
+          set_all_scripts(doc_array);
           setScripts(doc_array);
           setLoading(false);
         } else {
@@ -48,31 +51,37 @@ function ScriptDisplay() {
       });
   }
 
+  
+
   // ===== FAVORITE FEATURE =====
-  const [favorite, setFav] = useState([]);
+  const [favorite_arr, setFav] = useState([]);
+  const [isFav, fav_toggle] = useState(false);
 
   const add_favorite = item => {
-    if (!favorite.includes(item)) setFav(favorite.concat(item));
+    if (!favorite_arr.includes(item)) setFav(favorite_arr.concat(item));
     console.log(item);
   };
 
   const removeFavorite = item => {
-    let index = favorite.indexOf(item);
+    let index = favorite_arr.indexOf(item);
     console.log(index);
-    let temp = [...favorite.slice(0, index), ...favorite.slice(index + 1)];
+    let temp = [...favorite_arr.slice(0, index), ...favorite_arr.slice(index + 1)];
     setFav(temp);
   };
 
-  // let favoriteScripts = scripts.filter(script => favorite.includes(script));
+  function handleFavs() {
+    if (isFav == false) {
+      fav_toggle(true);
+      setScripts(favorite_arr);
+    }
+    else {
+      fav_toggle(false);
+      setScripts(allScripts);
+    }
+    
+  }
 
-  // let filtered = recipes.filter(recipe => {
-  //   if (searchTerm === "") {
-  //     return recipe;
-  //   } else if (recipe.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-  //     return recipe;
-  //   }
-  // });
-
+  
   console.log("Scripts: ", scripts);
   const search_parameters = Object.keys(Object.assign({}, ...scripts));
   // get unique genres from item.genres in Data
@@ -295,7 +304,15 @@ function ScriptDisplay() {
               />
             </div>
             <div className="col-sm filter-column" id="filter-selection-5">
-              <button class="filterFavs">Favorites</button>
+              {/* <button class="filterFavs" onClick={selectFavs}>Favorites</button> */}
+              <ToggleButton
+                onChange={handleFavs}
+                color="primary"
+                value="Favorit"
+                exclusive
+                aria-label="Platform"
+              >
+              </ToggleButton>
             </div>
             <div className="col-sm filter-column" id="filter-selection-4">
             <Slider
@@ -309,11 +326,6 @@ function ScriptDisplay() {
             </div>
             <span className="focus"></span>
           </div>
-        </div>
-        <div>
-          {favorite.slice().map((item => (
-            <li>{item.title}</li>
-          )))}
         </div>
         <div className="container">
           <ul className="card-grid">
