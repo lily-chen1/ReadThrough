@@ -7,6 +7,7 @@ import Users from "./pages/Users";
 import SearchResults from "./pages/SearchResults";
 import ScriptDisplay from "./pages/ScriptDisplay";
 import TypesenseTest from "./pages/TypesenseTest";
+import ScriptFunctions from "./pages/ScriptFunctions";
 
 const App = () => (
   <BrowserRouter>
@@ -18,6 +19,7 @@ const App = () => (
       <Route path="/searchresults" element={<SearchResults />} />
       <Route path="/scriptDisplay" element={<ScriptDisplay />} />
       <Route path="/typesensetest" element={<TypesenseTest />} />
+      <Route path="/scriptFunctions" element={<ScriptFunctions />} />
     </Routes>
   </BrowserRouter>
 );

@@ -23,6 +23,8 @@ function Home() {
       </Link>
       <Link style={{ display: "block" }} to="/typesensetest">
         Typesense Test
+      <Link style={{ display: "block" }} to="/ScriptFunctions">
+        Script Review
       </Link>
     </div>
   );

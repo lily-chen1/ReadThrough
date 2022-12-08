@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import Select from "react-select";
 import Slider from '@mui/material/Slider';
+import { ToggleButton } from '@adobe/react-spectrum';
 
 
 
 function ScriptDisplay() {
   const [error, setError] = useState(null);
+  const [allScripts, set_all_scripts] = useState([]);
   const [scripts, setScripts] = useState([]);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState({
@@ -37,6 +39,7 @@ function ScriptDisplay() {
             // doc is a DocumentSnapshot with actual data
             doc_array.push(doc.data());
           });
+          set_all_scripts(doc_array);
           setScripts(doc_array);
           setLoading(false);
         } else {
@@ -48,31 +51,45 @@ function ScriptDisplay() {
       });
   }
 
+  
+
   // ===== FAVORITE FEATURE =====
-  const [favorite, setFav] = useState([]);
+  const [favorite_arr, setFav] = useState([]);
+  const [isFav, fav_toggle] = useState(false);
 
   const add_favorite = item => {
-    if (!favorite.includes(item)) setFav(favorite.concat(item));
-    console.log(item);
+    
   };
 
-  const removeFavorite = item => {
-    let index = favorite.indexOf(item);
-    console.log(index);
-    let temp = [...favorite.slice(0, index), ...favorite.slice(index + 1)];
-    setFav(temp);
-  };
 
-  // let favoriteScripts = scripts.filter(script => favorite.includes(script));
+  function handle_change_favs(item){
+    if (favorite_arr.includes(item)) {
+      let index = favorite_arr.indexOf(item);
+      console.log(index);
+      let temp = [...favorite_arr.slice(0, index), ...favorite_arr.slice(index + 1)];
+      setFav(temp);
+      console.log(item.title, " removed from favorites");
 
-  // let filtered = recipes.filter(recipe => {
-  //   if (searchTerm === "") {
-  //     return recipe;
-  //   } else if (recipe.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-  //     return recipe;
-  //   }
-  // });
+    }
+    else {
+      if (!favorite_arr.includes(item)) setFav(favorite_arr.concat(item));
+      console.log(item.title, " added to favorites");
+    }
+  }
 
+  function handleFavs() {
+    if (isFav == false) {
+      fav_toggle(true);
+      setScripts(favorite_arr);
+    }
+    else {
+      fav_toggle(false);
+      setScripts(allScripts);
+    }
+    
+  }
+
+  
   console.log("Scripts: ", scripts);
   const search_parameters = Object.keys(Object.assign({}, ...scripts));
   // get unique genres from item.genres in Data
@@ -295,7 +312,8 @@ function ScriptDisplay() {
               />
             </div>
             <div className="col-sm filter-column" id="filter-selection-5">
-              <button class="filterFavs">Favorites</button>
+              {/* <button class="filterFavs" onClick={selectFavs}>Favorites</button> */}
+              <ToggleButton onChange={handleFavs}> Favorites </ToggleButton>
             </div>
             <div className="col-sm filter-column" id="filter-selection-4">
             <Slider
@@ -309,11 +327,6 @@ function ScriptDisplay() {
             </div>
             <span className="focus"></span>
           </div>
-        </div>
-        <div>
-          {favorite.slice().map((item => (
-            <li>{item.title}</li>
-          )))}
         </div>
         <div className="container">
           <ul className="card-grid">
@@ -340,7 +353,7 @@ function ScriptDisplay() {
                           <span className="genre-tag">{genre}</span>
                         ))}
                         <div>
-                          <button className="favorite-butt" onClick = {() => add_favorite(item)}>Add to Favorites</button>
+                          <button className="favorite-butt" onClick = {() => handle_change_favs(item)}>Add/Remove to Favorites</button>
                         </div>
                       </div>
                       

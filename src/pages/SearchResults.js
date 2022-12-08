@@ -1,43 +1,47 @@
 import {useState, useEffect} from "react";
 import '../SearchResults.css';
 import Data from "../mockData.json";
-import { db } from "../firebase";
 //import { ref, child, get } from "firebase/database";
-import { collection, getDocs} from "firebase/firestore";
+//import { collection, getDocs} from "firebase/firestore";
 import { Link } from "react-router-dom";
+import ScriptFunctions from './ScriptFunctions';
 
 
 // Note: the empty deps array [] means
 // this useEffect will run once
 function SearchResults() {
   //Getting Scripts from DB
-  const [scripts, setScripts] = useState({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-      getScripts();
-  }, []);
-
-  async function getScripts() {
-      //const dbRef = ref(db);
-      await getDocs(collection(db, "scripts"))
-      .then((snapshot) => {
-          if (snapshot.docs.length > 0) {
-          const doc_array = [];
-          snapshot.docs.forEach(doc => {
-              // doc is a DocumentSnapshot with actual data
-              doc_array.push(doc.data());
-          })
-          setScripts(doc_array);
-          setLoading(false);
-          }  
-          else {
-          console.log("No data available");
-          }
-      })
-      .catch((error) => {
-          console.error(error);
-      });
-  }
+//   const [scripts, setScripts] = useState({});
+//   const [loading, setLoading] = useState(true);
+  
+//   useEffect(() => {
+//     ScriptFunctions.getScripts(setScripts, setLoading);
+//   }, []);
+    // const scripts = ScriptFunctions.getScripts;
+    // const loading = ScriptFunctions.getLoading;
+    // const scripts = require('./ScriptFunctions').ScriptFunctions.scripts;
+   //const scripts = ScriptFunctions().getScripts();
+//   async function getScripts() {
+//       //const dbRef = ref(db);
+//       await getDocs(collection(db, "scripts"))
+//       .then((snapshot) => {
+//           if (snapshot.docs.length > 0) {
+//           const doc_array = [];
+//           snapshot.docs.forEach(doc => {
+//               // doc is a DocumentSnapshot with actual data
+//               doc_array.push(doc.data());
+//           })
+//           setScripts(doc_array);
+//           setLoading(false);
+//           }  
+//           else {
+//           console.log("No data available");
+//           }
+//       })
+//       .catch((error) => {
+//           console.error(error);
+//       });
+// }
 
 //########################
   const [error, setError] = useState(null);
@@ -86,8 +90,9 @@ function SearchResults() {
       return (
           <div className="wrapper">
             <div>
-            {console.log(scripts)}
-            <ScriptList scripts={scripts} />
+            {console.log("hi")}
+            {console.log(ScriptFunctions.getScripts())}
+            {/* <ScriptList scripts={scripts} /> */}
             </div>
               <div className="search-wrapper">
                   <label htmlFor="search-form">
@@ -168,13 +173,15 @@ function SearchResults() {
   }
 }
 
-const ScriptList = ({ scripts }) => (
-    <div>
-      <h2>List of scripts</h2>
-      {Object.keys(scripts).map((key) => (
-        <div key={key}>{scripts[key].title+","+scripts[key].authorName+","+scripts[key].genre}</div>
-      ))}
-    </div>
-  );
+// const ScriptList = ({ scripts }) => (
+//     <div>
+//       <h2>List of scripts</h2>
+//       {Object.keys(scripts).map((key) => (
+//         <div>
+//             <div key={key}>{scripts[key].title+","+scripts[key].authorName+","+scripts[key].genres[0]+","+scripts[key].genres[1]} <Link onClick={console.log("hi")}>Review</Link></div>
+//         </div>
+//         ))}
+//     </div>
+//   );
 
 export default SearchResults;
